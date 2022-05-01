@@ -1,4 +1,16 @@
 <template>
+
+  <el-dialog
+      custom-class="customerClass"
+      title=""
+      v-model="this.dialogVisible"
+      width="30%"
+      append-to-body
+      :before-close="handleClose">
+    <GoodsInfo :goodN = "this.goodN" v-on:Closed = "RClosed">
+    </GoodsInfo>
+  </el-dialog>
+
   <div style="display: none">
     <img src="../assets/rabbit.png" ref="rabbit">
   </div>
@@ -8,6 +20,11 @@
   <div style="display: none">
     <img src="../assets/wall.png" ref="wall">
   </div>
+  <el-input v-model="this.now.x"></el-input>
+  <el-input v-model="this.now.y"></el-input>
+  <el-input v-model="this.offsets['rabbit'].x"></el-input>
+  <el-input v-model="this.offsets['rabbit'].y"></el-input>
+  <el-input v-model="this.test"></el-input>
   <canvas
       ref="myCanvas"
       id="myCanvas"
@@ -26,11 +43,18 @@ import {ref} from "vue";
 import GoodsInfo from "@/components/GoodsInfo";
 export default {
   name: "GoodsView",
-  components: [
+  components: {
     GoodsInfo
-  ],
+  },
   data() {
+    const handleClose = (done) => {
+      done();
+    }
     return {
+      handleClose,
+      test:'no',
+      goodN: "",
+      dialogVisible: ref(false),
       images: {
         "rabbit":null,
         "bookmark": null,
@@ -64,6 +88,9 @@ export default {
     canvasMouseDown(e) {
       this.down = ref(true);
       this.now = this.getCanvasMousePos(e);
+      if (this.inImg('rabbit')) {this.clickImg('rabbit'); this.test = 'yes'; return;}
+      if (this.inImg('bookmark')) {this.clickImg('bookmark');}
+
     },
     canvasMouseMove(e) {
       if (this.down) {
@@ -80,7 +107,7 @@ export default {
         }
       }
     },
-    canvasMouseUp(e) {
+    canvasMouseUp() {
       this.down = ref(false);
     },
     getCanvasMousePos (e) {
@@ -93,7 +120,6 @@ export default {
       }
     },
     init() {
-      console.log('????')
       this.myCanvas = this.$refs.myCanvas;
       this.setupCanvas(this.myCanvas);
       this.images['rabbit'] = this.$refs.rabbit;
@@ -111,7 +137,6 @@ export default {
       this.ctx = myCanvas.getContext('2d');
       this.ctx.scale(scale, scale);
     },
-
     draw(name) {
       this.ctx.drawImage(this.images[name], this.offsets[name].x, this.offsets[name].y, this.sizes[name].width, this.sizes[name].height);
     },
@@ -120,7 +145,27 @@ export default {
     },
     offsetBack(name) {
       this.offsets[name].x = this.offsets[name].x + (this.pos.x - this.now.x) * 0.3
+    },
+    inImg(name) {
+      let IX = this.offsets[name].x;
+      let IY = this.offsets[name].y;
+      let width = this.sizes[name].width;
+      let height = this.sizes[name].height;
+      let x = this.now.x;
+      let y = this.now.y;
+      return x >= IX && x <= IX + width && y >= IY && y <= IY + height;
+    },
+
+    clickImg(name) {
+      this.goodN = name;
+      this.dialogVisible = ref(true);
+      this.down = ref(false)
+    },
+
+    RClosed(msg) {
+      this.dialogVisible = msg;
     }
+
   },
   mounted() {
     this.init()
@@ -131,4 +176,20 @@ export default {
 
 <style scoped>
 
+</style>
+
+<style>
+.customerClass{
+  display: flex;
+  flex-direction: column;
+  margin:0 !important;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  height:600px;
+  width: 600px;
+  border-radius: 50px;
+  /*height: 40%;*/
+}
 </style>
