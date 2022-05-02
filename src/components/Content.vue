@@ -26,9 +26,9 @@
         </a>
       </div>
       <div id="4" style="display:inline-block; width: 20%; float: left; margin-left: 20px; margin-top: 7px">
-        <a href="../views/GoodsView.vue" >
+        <el-link href="toGoods" target="_blank">
           <img src="../assets/paper-4.png" style="height: 500px">
-        </a>
+        </el-link>
       </div>
 
     </div>
@@ -58,7 +58,7 @@ export default {
     }
   },
   methods: {
-    goToGoods() {
+    toGoods() {
       this.$router.push('/goods')
     }
   }
