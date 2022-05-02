@@ -2,6 +2,16 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import GoodsView from "@/views/GoodsView";
 import GoodsInfo from "@/components/GoodsInfo";
 const routes = [
+  // {
+  //   path: '/',
+  //   component: App,
+  //   children:   {
+  //     path: '/IndexHeader',
+  //     name: 'IndexHeader',
+  //     component: IndexHeader,
+  //
+  //   }
+  // },
   {
     path: '/goods',
     name: 'GoodsView',
