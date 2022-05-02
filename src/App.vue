@@ -7,14 +7,9 @@
       <el-main style="padding-bottom:0px">
         <Content />
       </el-main>
-<!--      <el-container>-->
-<!--        <el-aside width="200px">-->
-<!--          <IndexTitle />-->
-<!--        </el-aside>-->
-<!--        <el-main >-->
-<!--          <Content />-->
-<!--        </el-main>-->
-<!--      </el-container>-->
+      <el-footer>
+        <IndexFooter />
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -22,12 +17,12 @@
 <script>
 import IndexHeader from '@/components/IndexHeader.vue'
 import Content from '@/components/Content.vue'
-// import IndexTitle from '@/components/IndexTitle.vue'
+import IndexFooter from '@/components/IndexFooter.vue'
 export default {
   components: {
     IndexHeader,
     Content,
-    // IndexTitle,
+    IndexFooter,
   },
 };
 </script>
