@@ -1,7 +1,10 @@
 <template>
-  <div id="IndexContent">
-    <div>
-      <img src="../assets/paper.png"><a style="font-family: shike">无界</a>
+  <div id="IndexContent" style="vertical-align: middle;">
+    <div style="width: 25%; height:40px;margin-top:50px;loat: left;clear:both; font-family: huangkai; font-size:30px; text-align: center">
+      流动的敦煌
+    </div>
+    <div style="height: 40px; float:left; clear:both; text-align: center">
+      <img src="../assets/word.png" style="height: 40px;margin-left: 115px">
     </div>
   </div>
 </template>
@@ -11,7 +14,7 @@
 import paper from '../assets/paper.png'
 
 export default {
-  name: "IndexTitle",
+  name: "IndexFooter",
   props: {
 
   },
