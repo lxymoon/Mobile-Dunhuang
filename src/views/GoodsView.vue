@@ -192,7 +192,7 @@ export default {
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  height:600px;
+  height:660px;
   width: 600px;
   border-radius: 50px;
   /*height: 40%;*/

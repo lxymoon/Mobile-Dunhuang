@@ -1,9 +1,16 @@
 <template>
-  <el-form>
-    <el-image :src="this.images[this.goodN]">
+  <el-form class="form">
+    <div class="block">
+      <el-carousel :height="bannerHeight + 'px'">
+        <el-carousel-item v-for="item in rabbitwrap" :key="item.url">
+          <img :src="item.url" class="bannerimg" />
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <!-- <el-image :src="this.images[this.goodN]"> -->
 
-    </el-image>
-    <el-form-item style="margin-top: 20px">
+    <!-- </el-image> -->
+    <el-form-item style=":margin-top: 20px">
       <span style="font-weight: bold; font-size: 25px; color: black">
         {{this.data[this.goodN].goodN}}
       </span>
@@ -41,6 +48,13 @@ export default {
   },
   data() {
     return {
+      bannerHeight: 200,
+      rabbitwrap:[
+        {url:require("../assets/rabbit.png")},
+        {url:require("../assets/rabbit-1.jpg")},
+        {url:require("../assets/rabbit-2.jpg")},
+        {url:require("../assets/rabbit-3.jpg")}
+      ],
       images: {
         'rabbit': rabbit,
         'bookmark': bookmark,
@@ -59,14 +73,58 @@ export default {
       }
     }
   },
+  mounted(){
+    this.setSize();
+    window.addEventListener('resize', ()=>{
+      this.setSize();
+    },false);
+  },
   methods: {
     purchase() {
       this.$emit("Closed", false);
+    },
+    setSize(){
+      this.bannerHeight = document.body.clientWidth / 4
     }
   }
 }
 </script>
 
 <style scoped>
+
+.bannerimg{
+  /* padding-bottom:-20px; */
+  object-fit:contain;
+  vertical-align: center;
+  width: 90%;
+  /* height: inherit; */
+  line-height:inherit;
+}
+.el-carousel__item {
+  text-align: center;
+  vertical-align: center;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.el-carousel__item h3 {
+  color: #fff;
+  font-size: 14px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+/* .el-carousel__item:nth-child(1) {
+   padding-top:50px;
+ } */
+.el-carousel__item:nth-child(2n) {
+  background-color: #fff;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #fff;
+}
 
 </style>
